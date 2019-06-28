@@ -1,0 +1,2 @@
+All:
+	go main.go
