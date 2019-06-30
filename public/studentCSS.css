@@ -1,3 +1,15 @@
+/*This is the CSS I needed to add to fix the input windows*/
+/*They were hidden under the chalk board, I needed to bring them up to the foregound*/
+  .typeText{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #000;
+    z-index: 999;
+    position:relative;
+ }
+
 /*The ChalkBoard*/
 #frame {
       background-color: rgb(140, 140, 140);
