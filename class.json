@@ -1,0 +1,8 @@
+{
+    "logins": [
+	{ "type": "TEACHER", "nickname": "MrOlson", "password": "noslorm" },
+	{ "type": "STUDENT", "nickname": "Sharon",  "password": "norahs" },
+	{ "type": "STUDENT", "nickname": "Jon",     "password": "noj" },
+	{ "type": "STUDENT", "nickname": "Collin",  "password": "nilloc" }
+    ]
+}

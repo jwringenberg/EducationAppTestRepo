@@ -7,8 +7,14 @@ import (
    "github.com/gorilla/websocket"
 )
 
-var clients = make(map[*websocket.Conn]bool) // connected clients
-var broadcast = make(chan Message)           // broadcast channel
+type Status struct {
+    LoggedIn bool
+    Teacher bool
+    Connected bool
+}
+
+var clients = make(map[*websocket.Conn]int) // connected clients
+var broadcast = make(chan Message)          // broadcast channel
 
 // configure the upgrader
 var upgrader = websocket.Upgrader{}
@@ -24,6 +30,9 @@ type Echo struct {
 }
 
 func main() {
+    // Initialize the DB
+    InitDB()
+
     // Create a simple file server
     fs := http.FileServer(http.Dir("../public"))
     http.Handle("/", fs)
@@ -42,7 +51,7 @@ func main() {
 }
 
 func handleConnections(w http.ResponseWriter, r *http.Request) {
-    // Upgrade initail GET request to a websocket
+    // Upgrade initial GET request to a websocket
     ws, err := upgrader.Upgrade(w, r, nil)
     if err != nil {
         log.Fatal(err)
@@ -52,7 +61,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
     defer ws.Close()
 
     // Register our new client
-    clients[ws] = true
+    clients[ws] = 1
 
     for {
     	var msg Message
@@ -64,8 +73,55 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 	    break
 	}
 
-	// Send the new received message to the broadcast channel
-	broadcast <- msg
+	if clients[ws] > 2 {
+	   if clients[ws] > 4 {
+	      msg.Type = "TEACHER"
+	   } else {
+	      msg.Type = "STUDENT"
+	   }
+	   // Send the new received message to the broadcast channel
+	   broadcast <- msg
+	} else {
+	   if msg.Type == "LOGIN" {
+	      if ValidLogin(msg.Name, msg.Message) {
+	      	 teacher := 0
+		 if IsTeacher(msg.Name) {
+		    teacher = 4;
+		 }
+	         clients[ws] = 3 + teacher
+	         var toSend Echo
+		 if clients[ws] > 4 {
+	            toSend.Message = "TEACHER"
+		 } else {
+	            toSend.Message = "STUDENT"
+		 }
+	         err := ws.WriteJSON(toSend)
+	         if err != nil {
+	            log.Printf("error: %v", err)
+		    delete(clients, ws)
+		    return
+	         }
+	      } else {
+	         var toSend Echo
+	         toSend.Message = "Invalid login"
+	         err := ws.WriteJSON(toSend)
+	         if err != nil {
+	            log.Printf("error: %v", err)
+		    delete(clients, ws)
+		    return
+	         }
+	      }
+	   } else {
+	      var toSend Echo
+	      toSend.Message = "Login first"
+	      err := ws.WriteJSON(toSend)
+	      if err != nil {
+	         log.Printf("error: %v", err)
+		 delete(clients, ws)
+		 return
+	     }
+	  }
+       }  
     }
 }
 

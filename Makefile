@@ -1,2 +1,2 @@
 All:
-	go main.go
+	go build main.go login.go
