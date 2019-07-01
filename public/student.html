@@ -3,16 +3,67 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Student WebsSockets</title>
-    <link rel="stylesheet" href="style.css">
+   <!--TODO: build a favicon that cutesy-->
+
+  <!-- I found a Google Font that looks cutesy -->
+  <link rel="stylesheet" href="studentCSS.css">
+
+  <!-- I found a Google Font that looks cutesy -->
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
+  <!-- Font Awesome Gives US the STARS from the Icon Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="wsStudentDemo.js"></script>
   </head>
+  
+  
   <body>
+    <div id="frame">
+    <div id="surface">
+    <!--Original Chat Controls with added class to mess with their CSS-->
     <div id="chatControls">
-      <input id="name" placeholder="Type your name" />
-      <input id="message" placeholder="Type your message">
+      Secret Name:
+      <input class = "typedText" id="name" placeholder="Type your name" />
+      <br>
+      Description of Problem:
+      <input  class = "typedText" id="message" placeholder="Type your message">
+      <ul id="userlist"> <!-- Built by JS --> </ul>
+      <div id="chat">    <!-- Built by JS --> </div>
+      <!--moved the button down-->
+      </div><!--Close up Original Controls-->
+    
+      <div class="row"><!--The Stars in own div-->
+      <h2>Star Rating: How Stuck Are You?</h2>
+      <!--This is the star rating graphic really just modified radio buttons-->
+      <!--Chris, how would the backend recieve this information?-->
+      <!--I put it in a form tag and gave each one a value if that like,..helps-->
+      <form class="rate">
+        <input id="rate1-star5" type="radio" name="rate1" value="5" />
+        <label for="rate1-star5" title="I could figure it out but some help would be nice">5</label>
+
+        <input id="rate1-star4" type="radio" name="rate1" value="4" />
+        <label for="rate1-star4" title="Some help would be nice, I could ask a friend">4</label>
+
+        <input id="rate1-star3" type="radio" name="rate1" value="3" />
+        <label for="rate1-star3" title="I could probably work on something else, maybe a different part of the project">3</label>
+
+        <input id="rate1-star2" type="radio" name="rate1" value="2" />
+        <label for="rate1-star2" title="Bad, I can't figure this out">2</label>
+
+        <input id="rate1-star1" type="radio" name="rate1" value="1" />
+        <label for="rate1-star1" title="Very bad, I AM STUCK!">1</label>
+       </form>
+      </div> <!--close up stars-->
+       
+      <br> <!--TODO: Make this button look cutesy in CSS-->
       <button id="send">Send</button>
+     </div> <!--Close Up chalk board Surface-->
+    
+      <div id="tray">
+      <div id="eraser"></div>
+      <div id="chalk"></div>
+      </div>
     </div>
-    <ul id="userlist"> <!-- Built by JS --> </ul>
-    <div id="chat">    <!-- Built by JS --> </div>
-    <script src="wsStudentDemo.js"></script>
   </body>
 </html>
