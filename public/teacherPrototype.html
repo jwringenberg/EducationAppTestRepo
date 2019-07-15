@@ -1,0 +1,37 @@
+<html>
+<head>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="teacherCSS.css">
+
+<script>
+  var sp = "&nbsp&nbsp&nbsp&nbsp";
+  $(document).ready(function () {
+
+    $('button').click(function () {
+        $('#todo').append("<li>" + $("input[name=id]").val() + sp + $("input[name=des]").val() + sp + $("input[name=stars]").val() + "<a href='#' id='close'>delete</a></li>");
+    });
+
+    $("body").on('click', 'li', function () {
+        $(this).closest("li").remove();
+    });
+});
+</script>
+
+</head>
+
+
+<body>
+    <div class="form-group">
+        <h1>TODO</h1>
+        <form role="form">
+        <input type="text" class="control" placeholder="Name" name="id">
+        <input type="text" class="control" placeholder="Description" name="des">
+        <input type="text" class="control" placeholder="Stars" name="stars">
+        </form>
+        <button type="button" class="btn">Add</button>
+    </div>
+    <br>
+    <ul class="list-unstyled" id="todo"></ul>
+</body>
+</html>
