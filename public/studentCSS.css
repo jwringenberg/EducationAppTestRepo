@@ -10,6 +10,15 @@
     position:relative;
  }
 
+/*The button*/
+#send{
+  border: 1px solid white;
+  color: white;
+  background-color:  #555;
+  padding: 0.5rem 2rem;
+  border-radius: 0 0.2rem 0.2rem 0;
+}
+
 /*The ChalkBoard*/
 #frame {
       background-color: rgb(140, 140, 140);
