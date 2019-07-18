@@ -3,98 +3,38 @@
 <head>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="teacherCSS.css">
 
 <script>
+  var sp = "&nbsp&nbsp&nbsp&nbsp";
   $(document).ready(function () {
+
     $('button').click(function () {
-        $('#todo').append("<li>" + $("input[name=task]").val() + "<a href='#' class='close'>delete</a></li>");
+        $('#todo').append("<li>" + $("input[name=id]").val() + sp + $("input[name=des]").val() + sp + $("input[name=stars]").val() + "<a href='#' id='close'>delete</a></li>");
     });
-    $("body").on('click', 'a', function () {
+
+    $("body").on('click', 'li', function () {
         $(this).closest("li").remove();
     });
 });
 </script>
-
-
-<style>
-  body {
-  background-color: #d7d7d7
-}
-h1{
-  font-family: monospace;
-}
-
-.control{
-  border: none;
-    flex: 1;
-    outline: none;
-    padding: 0.5rem;
-    border-radius: 0.2rem 0 0 0.2rem;
-}
-.btn{
-  border: 1px solid white;
-  color: #3d3d3d;
-  padding: 0.5rem 2rem;
-  background-color: transparent;
-  outline: none;
-  border-radius: 0 0.2rem 0.2rem 0;
-}
-  form {
-    display: inline-block;
-}
-.form-group {
-    text-align: center;
-    padding-bottom: 25px;
-}
-
-/*#todo {
-
-    margin: 0 auto;
-    width: 500px;
-}*/
-
-#todo li{
-  display: block;
-  color: #000;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-/* Change the link color on hover */
-#todo li:hover {
-  background-color: #555;
-  color: white;
-}
-
-/*#todo:hover {
-  display: block;
-  background-color: white;
-  padding: 8px 16px;
-  text-decoration: none;
-}*/
-
-a.close {
-    float: right;
-    color: red;
-    background-color: transparent;
-    outline: none;
-    font-family: monospace;
-    text-decoration: none;
-}
-</style>
 
 </head>
 
 
 <body>
     <div class="form-group">
-      <h1>TODO</h1>
-    <form role="form">
-        <input type="text" class="control" placeholder="Your Task" name="task">
-    </form>
-    <button type="button" class="btn">Add</button>
-        </div>
-        <div></div>
-    <ul class="list-unstyled"><li id = "todo"></li></ul>
+        <h1>TODO</h1>
+        <form role="form">
+        <input type="text" class="control" placeholder="Name" name="id">
+        <input type="text" class="control" placeholder="Description" name="des">
+        <input type="text" class="control" placeholder="Stars" name="stars">
+        </form>
+        <button type="button" class="btn">Add</button>
+    </div>
+    <br>
+    <ul class="list-unstyled" id="todo"></ul>
 </body>
 </html>
+
+
