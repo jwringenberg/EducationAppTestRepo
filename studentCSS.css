@@ -136,4 +136,4 @@ transition: 0.2s;
 /*This keeps them all selected after the click!*/
 input:checked ~ label {
 color: rgb(245, 227, 66);
-}
+} 
