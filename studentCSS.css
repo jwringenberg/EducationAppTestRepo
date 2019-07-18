@@ -1,0 +1,139 @@
+/*input*/
+
+.typeText{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #000;
+  z-index: 999;
+  position:relative;
+}
+
+/*The button*/
+#send{
+  border: 1px solid white;
+  color: white;
+  background-color:  #555;
+  padding: 0.5rem 2rem;
+  border-radius: 0 0.2rem 0.2rem 0;
+}
+
+/*This is the chalk board*/
+
+#frame {
+  background-color: rgb(140, 140, 140);
+  border-color: rgb(179, 179, 179);
+  border-style: solid;
+  border-width: 0.5rem 0.5rem 1rem 0.5rem;
+  /* This like, sets up some shadows to give the frame some depth */
+  /*Trust ME the frame NEEDS THIS */
+  box-shadow:
+    inset 0 2px 0 -1px rgba(0, 0, 0, 0.15),
+    inset 2px 0 0 -1px rgba(0, 0, 0, 0.15),
+    inset -2px 0 0 -1px rgba(0, 0, 0, 0.15),
+    inset 0 2px 1px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+/* writing surface */
+#surface {
+  flex-grow: 1;
+  padding: 5px;
+  padding-left: 7px;
+    /*Just Trust me on this font, its going to look GREAT*/
+  font-family: 'Gloria Hallelujah';
+  font-style: normal;
+  font-weight: 400;
+  /*Trust me on this yellow*/
+  color: rgb(245, 227, 66);
+}
+
+#tray {
+  align-items: flex-end;
+  display: flex;
+  position: relative;
+}
+
+/* lip and shadow underneath so it looks like a whiteboard */
+#tray::after {
+  background-image: linear-gradient(to bottom,
+    transparent 4px,
+    rgba(0, 0, 0, 0.3) 4px,
+    transparent
+  );
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  bottom: -1rem;
+  content: '';
+  display: block;
+  height: 1rem;
+  left: -0.5rem;
+  position: absolute;
+  right: -0.5rem;
+}
+
+#eraser {
+  background-color: rgb(70,70,70);
+  border-radius: 0 0 4px 4px;
+  height: 0.75em;
+  position: absolute;
+  right: 5%;
+  width: 2em;
+
+}
+/* eraser handle */
+#eraser:before {
+  background-color: rgb(40,40,40);
+  border-radius: 4px;
+  content: '';
+  display: block;
+  height: 0.25em;
+  margin: 0 -2px;
+}
+
+#chalk {
+  position: absolute;
+  background-color:  rgb(245, 227, 66);
+  display: block;
+  height: 5px;
+  width: 2em;
+  right: 8%;
+}
+
+/* This is all for the Star rating thingy*/
+.rate {
+display: inline-block;
+margin: 0;
+padding: 0;
+border: none;
+}
+
+input {
+display: none;
+}
+
+/*The cutsy star icons*/
+label {
+float: right;
+font-size: 0;
+color: rgb(217,217,217); /*Light Grey*/
+}
+
+label:before {
+content: "\f005";
+font-family: FontAwesome;
+font-size: 40px;
+}
+
+/*This keeps them all selected in the middle of selecting!*/
+label:hover,
+label:hover ~ label {
+color: rgb(245, 227, 66);
+transition: 0.2s;
+}
+/*This keeps them all selected after the click!*/
+input:checked ~ label {
+color: rgb(245, 227, 66);
+}
